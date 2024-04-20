@@ -22,3 +22,12 @@
 
   With these steps, I managed to stop the app from crashing when creating users by fixing how it interacts with the database and testing to make sure it works properly.
 
+### [Enforce Username Length Limit to 64 Characters](https://github.com/VaishnaviGangam/event_manager/issues/4)
+
+We have successfully resolved the issue regarding unrestricted username lengths within the system. By enforcing a maximum limit of 64 characters for usernames, we have addressed potential UI display problems and database constraints.
+
+1. Frontend Validation: Implemented client-side validation to restrict username inputs to a maximum of 64 characters.
+Provided real-time feedback to users regarding username length limits.
+2. Backend Validation: Updated backend API endpoints to incorporate server-side validation and implemented validation checks to ensure usernames adhere to the 64-character limit. Configured error responses to inform clients of validation failures.
+3. Database Schema Update: Modified the database schema to enforce the 128-character limit on the username column. Applied length constraints using database migration scripts.
+4. Documentation Update: Updated user guides and developer resources to reflect the new username length limitation. Provided clear instructions on the maximum allowed username length.

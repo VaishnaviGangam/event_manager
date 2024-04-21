@@ -2,6 +2,8 @@ import pytest
 from app.dependencies import get_settings
 from app.services.user_service import UserService
 from app.models.user_model import User
+from app.utils.security import hash_password, verify_password
+import settings
 
 pytestmark = pytest.mark.asyncio
 
@@ -158,3 +160,37 @@ async def test_unlock_user_account(db_session, locked_user):
     await UserService.unlock_user_account(db_session, locked_user.id)
     is_locked = await UserService.is_account_locked(db_session, locked_user.username)
     assert not is_locked, "The account should be unlocked after calling unlock_user_account."
+    
+async def test_list_users(db_session):
+    # Arrange
+    # Create multiple users for testing
+    for i in range(1, 11):
+        await UserService.create(db_session, {
+            "username": f"user{i}",
+            "email": f"user{i}@example.com",
+            "password": f"Password{i}!",
+        })
+    # Act
+    users = await UserService.list_users(db_session, skip=0, limit=5)
+    # Assert
+    assert len(users) == 5
+
+async def test_count(db_session):
+    for i in range(1, 11):
+        await UserService.create(db_session, {
+            "username": f"user{i}",
+            "email": f"user{i}@example.com",
+            "password": f"Password{i}!",
+        })
+    count = await UserService.count(db_session)
+    assert count == 10
+    
+async def test_create_user_with_existing_data(db_session):
+    user_data = {
+        "username": "valid_user",
+        "email": "valid_user@example.com",
+        "password": "ValidPassword123!",
+    }
+    user = await UserService.create(db_session, user_data)
+    user = await UserService.create(db_session, user_data)
+    assert user is None

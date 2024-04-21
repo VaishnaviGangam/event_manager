@@ -62,3 +62,29 @@ To update the Gunicorn dependency, follow these steps:
 
 After updating the dependency, ensure to rebuild and redeploy your Docker images to incorporate the changes. This should resolve the Docker scan failures and ensure that your CI/CD pipeline consistently passes the Docker scan test, confirming the absence of known security vulnerabilities in your Docker images.
 
+### [Edge Case Testing for Profile Field Updates](https://github.com/VaishnaviGangam/event_manager/issues/11)
+
+- Test different combinations of profile field updates to uncover potential issues and ensure a smooth user experience.
+- Ensure the API handles edge cases gracefully and provides appropriate responses in all scenarios.
+
+**Testing Approach**:
+1. **Identify Scenarios**: We've identified several scenarios for updating profile fields, including:
+   - Simultaneously updating bio and profile picture URL.
+   - Updating bio only.
+   - Updating profile picture URL only.
+   - Attempting to update non-existent fields.
+   - Updating with invalid data (e.g., empty bio or invalid URL).
+   - Updating with excessively long bio or URL.
+   
+2. **Write Test Cases**: We've written test cases covering each identified scenario, ensuring both positive and negative cases are tested.
+
+3. **Execution and Verification**: We've executed the test cases using Pytest and verified that the API handles edge cases gracefully and provides appropriate responses.
+
+4. **Error Handling**: If any issues or unexpected behavior were identified during testing, we've refactored code or added error handling logic to address them.
+
+
+## Reflection
+This assignment taught me the importance of testing for edge cases and how collaboration can enhance testing strategies. We faced challenges in identifying all possible scenarios but found solutions through iteration. Overall, it improved my testing skills in software development.
+
+# Docker Screenshot
+![Docker Screenshot](docker.png)

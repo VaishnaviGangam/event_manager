@@ -60,6 +60,22 @@ def test_user_update_partial(user_update_data):
     partial_data = {"email": user_update_data["email"]}
     user_update = UserUpdate(**partial_data)
     assert user_update.email == partial_data["email"]
+    
+def test_user_update_partial_with_full_name(user_update_data):
+    partial_data = {"email": user_update_data["email"], "full_name": user_update_data["full_name"]}
+    user_update = UserUpdate(**partial_data)
+    assert user_update.email == partial_data["email"]
+    assert user_update.full_name == partial_data["full_name"]
+    
+def test_user_update_partial_with_invalid_link(user_update_data):
+    partial_data = {"email": user_update_data["email"], "profile_picture_url": "https://example.com/profile_pictures/john_doe_updated"}
+    with pytest.raises(ValidationError):
+        UserUpdate(**partial_data)
+
+def test_user_update_partial_with_invalid_bio(user_update_data):
+    partial_data = {"email": user_update_data["email"], "bio": "".join(["a" for _ in range(501)])}
+    with pytest.raises(ValidationError):
+        UserUpdate(**partial_data)
 
 # Tests for UserResponse
 def test_user_response_datetime(user_response_data):
@@ -98,3 +114,11 @@ def test_user_base_password_invalid(password, user_base_data):
     user_base_data["password"] = password
     with pytest.raises(ValidationError):
         UserCreate(**user_base_data)
+
+
+@pytest.mark.parametrize("full_name", ["test user1312"])
+def test_user_base_full_name_invalid(full_name, user_base_data):
+    user_base_data["full_name"] = full_name
+    with pytest.raises(ValidationError):
+        UserCreate(**user_base_data)
+        

@@ -37,6 +37,12 @@ async def test_retrieve_user(async_client, user, token):
     response = await async_client.get(f"/users/{user.id}", headers=headers)
     assert response.status_code == 200
     assert response.json()["id"] == str(user.id)
+    
+@pytest.mark.asyncio
+async def test_retrieve_user_with_wrong_token(async_client, user):
+    headers = {"Authorization": f"Bearer "}
+    response = await async_client.get(f"/users/10000000", headers=headers)
+    assert response.status_code == 422
 
 @pytest.mark.asyncio
 async def test_update_user(async_client, user, token):
@@ -116,3 +122,32 @@ async def test_delete_user_does_not_exist(async_client, token):
     delete_response = await async_client.delete(f"/users/{non_existent_user_id}", headers=headers)
     assert delete_response.status_code == 404
 
+
+# Test case for listing users
+@pytest.mark.asyncio
+async def test_list_users(async_client, user, token):
+    # Arrange
+    headers = {"Authorization": f"Bearer {token}"}
+    # Act
+    response = await async_client.get("/users/", headers=headers)
+    # Assert
+    assert response.status_code == 200
+    response_data = response.json()
+    assert "items" in response_data
+    assert "pagination" in response_data
+    assert "total_items" in response_data["pagination"]
+    assert "total_pages" in response_data["pagination"]
+    assert "links" in response_data["pagination"]
+    assert len(response_data["items"]) > 0  # Ensure there are users returned
+    assert len(response_data["items"]) <= 10  # Ensure the default limit is respected
+    for user_data in response_data["items"]:
+        assert "id" in user_data
+        assert "bio" in user_data
+        assert "full_name" in user_data
+        assert "profile_picture_url" in user_data
+        assert "username" in user_data
+        assert "email" in user_data
+        assert "last_login_at" in user_data
+        assert "created_at" in user_data
+        assert "updated_at" in user_data
+        assert "links" in user_data

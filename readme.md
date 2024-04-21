@@ -26,8 +26,24 @@
 
 We have successfully resolved the issue regarding unrestricted username lengths within the system. By enforcing a maximum limit of 64 characters for usernames, we have addressed potential UI display problems and database constraints.
 
-1. Frontend Validation: Implemented client-side validation to restrict username inputs to a maximum of 64 characters.
+1. **Frontend Validation:** Implemented client-side validation to restrict username inputs to a maximum of 64 characters.
 Provided real-time feedback to users regarding username length limits.
-2. Backend Validation: Updated backend API endpoints to incorporate server-side validation and implemented validation checks to ensure usernames adhere to the 64-character limit. Configured error responses to inform clients of validation failures.
-3. Database Schema Update: Modified the database schema to enforce the 128-character limit on the username column. Applied length constraints using database migration scripts.
-4. Documentation Update: Updated user guides and developer resources to reflect the new username length limitation. Provided clear instructions on the maximum allowed username length.
+2. **Backend Validation:** Updated backend API endpoints to incorporate server-side validation and implemented validation checks to ensure usernames adhere to the 64-character limit. Configured error responses to inform clients of validation failures.
+3. **Database Schema Update:** Modified the database schema to enforce the 128-character limit on the username column. Applied length constraints using database migration scripts.
+4. **Documentation Update:** Updated user guides and developer resources to reflect the new username length limitation. Provided clear instructions on the maximum allowed username length.
+
+### [Limit Password Length to 64 Characters](https://github.com/VaishnaviGangam/event_manager/issues/6)
+
+To boost security measures, I made the following upgrades:
+
+1. **Username Length Limit:** Set a maximum limit of 64 characters for usernames to prevent potential security risks like buffer overflow attacks.
+
+2. **Real-time Feedback:** Added instant feedback on the frontend to guide users within the username length limit, reducing the chance of errors.
+
+3. **Backend Validation:** Strengthened backend validation to enforce username length restrictions, enhancing protection against malicious inputs.
+
+4. **Database Update:** Updated the database schema to enforce the new username length limit, securing stored data.
+
+5. **Documentation Update:** Updated user guides and developer docs to highlight the new username length rule, ensuring clarity for users and developers alike.
+
+These changes aim to improve the application's security posture by minimizing potential vulnerabilities related to username inputs.

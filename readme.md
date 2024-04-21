@@ -36,14 +36,14 @@ Provided real-time feedback to users regarding username length limits.
 
 To boost security measures, I made the following upgrades:
 
-1. **Username Length Limit:** Set a maximum limit of 64 characters for usernames to prevent potential security risks like buffer overflow attacks.
+1. **Password Length Limit:** Set a maximum limit of 64 characters for password to prevent potential security risks like buffer overflow attacks.
 
-2. **Real-time Feedback:** Added instant feedback on the frontend to guide users within the username length limit, reducing the chance of errors.
+2. **Real-time Feedback:** Added instant feedback on the frontend to guide users within the password length limit, reducing the chance of errors.
 
-3. **Backend Validation:** Strengthened backend validation to enforce username length restrictions, enhancing protection against malicious inputs.
+3. **Backend Validation:** Strengthened backend validation to enforce password length restrictions, enhancing protection against malicious inputs.
 
-4. **Database Update:** Updated the database schema to enforce the new username length limit, securing stored data.
+4. **Database Update:** Updated the database schema to enforce the new password length limit, securing stored data.
 
-5. **Documentation Update:** Updated user guides and developer docs to highlight the new username length rule, ensuring clarity for users and developers alike.
+5. **Documentation Update:** Updated user guides and developer docs to highlight the new password length rule, ensuring clarity for users and developers alike.
 
-These changes aim to improve the application's security posture by minimizing potential vulnerabilities related to username inputs.
+These changes aim to improve the application's security posture by minimizing potential vulnerabilities related to password inputs.

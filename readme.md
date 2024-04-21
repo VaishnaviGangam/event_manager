@@ -47,3 +47,18 @@ To boost security measures, I made the following upgrades:
 5. **Documentation Update:** Updated user guides and developer docs to highlight the new password length rule, ensuring clarity for users and developers alike.
 
 These changes aim to improve the application's security posture by minimizing potential vulnerabilities related to password inputs.
+
+
+###  [Resolve Docker Scan Failures in CI/CD Pipeline](https://github.com/VaishnaviGangam/event_manager/issues/9)
+
+To address the Docker scan failures in the CI/CD pipeline, I've fixed the issue by updating the Gunicorn dependency from version 21.2.0 to 22.0.0. This update ensures that our application is utilizing the latest version of Gunicorn, which may include security patches and improvements.
+
+To update the Gunicorn dependency, follow these steps:
+
+1. Open the `requirements.txt` file in your project directory.
+2. Locate the line specifying the Gunicorn dependency, typically listed as `gunicorn==21.2.0`.
+3. Replace `21.2.0` with `22.0.0`.
+4. Save the changes to the `requirements.txt` file.
+
+After updating the dependency, ensure to rebuild and redeploy your Docker images to incorporate the changes. This should resolve the Docker scan failures and ensure that your CI/CD pipeline consistently passes the Docker scan test, confirming the absence of known security vulnerabilities in your Docker images.
+
